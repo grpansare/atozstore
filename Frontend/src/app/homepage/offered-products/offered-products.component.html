@@ -1,0 +1,57 @@
+
+
+
+ <div class="container-fluid testimonials">
+  <div class="text-center">
+    <h2 align="center" id="bycategory" style="font-family: monospace; font-size: 2rem;" class="mt-2">
+      Deals & Offers
+     </h2>
+
+  </div>
+
+  <ngb-carousel  [showNavigationArrows]="true">
+    <ng-container *ngFor="let productarr of products">
+      <ng-template ngbSlide>
+
+        <div class="products" >
+
+
+
+
+          <div class="rounded-lg product pt-3 px-5 overflow-hidden  mr-3" *ngFor="let product of productarr" >
+            <div (click)="openDialog(product)" >
+            <img
+              [src]="product.imageFile.filePath"
+              alt="Laptop"
+              class="aspect-[16/9] w-full rounded-md md:aspect-auto md:h-[300px] lg:h-[200px]"
+            />
+            <div class="p-2 mt-2">
+              <h3 class="inline-flex  items-center text-md font-semibold">
+               {{product.productname |titlecase}}
+              </h3>
+
+
+              <div class="price" *ngIf="product.offer!=='null'  else nodiscount">
+              <div class="d-flex align-items-center gap-2 border-black" >
+                <h2>  {{ product.price | calculatepricepipe:product.offer | currency:'INR':'symbol':'1.2-2' }}</h2>
+             <h5 class="d-flex align-items-center gap-2" > MRP:<span class="text-decoration-line-through">{{ product.price | currency:'INR':'symbol':'1.2-2' }}</span></h5>
+              </div>
+              <span style="position: relative; bottom: 8px;"> ({{product.offer}} Off) </span>
+
+             </div>
+          <ng-template #nodiscount>
+          <h2>{{ product.price | currency:'INR':'symbol':'1.2-2' }}</h2>
+
+          </ng-template>
+
+            </div>
+          </div>
+          </div>
+
+
+          </div>
+      </ng-template>
+    </ng-container>
+
+  </ngb-carousel>
+</div>

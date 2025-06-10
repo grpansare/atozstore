@@ -1,0 +1,7 @@
+ @media (max-width: 576px) { /* Apply styles only for small screens */
+    .modal-dialog {
+      max-width: 90%; /* Adjust the maximum width of the modal */
+      margin: auto; /* Center the modal horizontally */
+      margin-top: 10vh; /* Adjust the top margin to center vertically */
+    }
+  }

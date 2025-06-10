@@ -1,0 +1,125 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalRef.close(product)"
+    class="btn btn-dark"
+  ><i class="fa fa-times"></i></button>
+</div>
+
+<div class="bootstrap-wrapper">
+  <div class="container formbox text-center">
+    <div class="row">
+      <div class="col-md-12  col-sm-4">
+
+        <h2 class="mb-5">Update Product</h2>
+
+        <form [formGroup]="productForm" class="p-5" (ngSubmit)="sendProductData()">
+
+          <div class="row">
+            <div class="col-md-6 ">
+
+
+
+                  <!-- <input placeholder="" id="image" accept="image/*" type="file" (change)="getImage($event)"> -->
+                  <div *ngIf="imagePath" class="flex justify-center align-items-start">
+                    <img [src]="imagePath" alt="" style="width: 300px; height: 300px;"  class="img-thumbnail mb-2 ">
+
+              </div>
+              </div>
+            <div class="col-md-6 gap-3">
+
+
+
+
+
+              <mat-form-field class="w-100">
+                <mat-label>Product Name</mat-label>
+                <input matInput placeholder="" formControlName="productname" type="text">
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Category</mat-label>
+                <mat-select placeholder="Select Category" formControlName="category" id="category">
+                  <mat-option value="Fashion">Fashion</mat-option>
+                  <mat-option value="Grocery">Grocery</mat-option>
+                  <mat-option value="Electronics">Electronics</mat-option>
+                  <mat-option value="Furniture">Furniture</mat-option>
+                  <mat-option value="Beauty">Beauty</mat-option>
+                  <mat-option value="Books">Books</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Price</mat-label>
+                <input matInput placeholder="" formControlName="price" type="number">
+              </mat-form-field>
+          </div>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field  class="w-100">
+                <mat-label>Quantity</mat-label>
+                <input matInput placeholder="" formControlName="quantity" type="number">
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field  class="w-100">
+                <mat-label>Offer</mat-label>
+                <input matInput placeholder="" formControlName="offer" type="text">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field  class="w-100">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="" formControlName="description" type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div formArrayName="colors" class="flex gap-2 justify-center" *ngIf="product.colors[0] !== 'standard' && product.colors[0] !=='Standard'">
+            <mat-form-field *ngFor="let colorControl of colors.controls; let i = index" class="w-100">
+              <mat-label>Color {{i+1}}</mat-label>
+              <input matInput type="text" [formControlName]="i">
+              <mat-icon matSuffix (click)="removeColor(i)" *ngIf="product.colors.length > 1">remove_circle</mat-icon>
+            </mat-form-field>
+          </div>
+          <div formArrayName="sizes" class="flex gap-2 justify-center" *ngIf="product.sizes[0] !== 'standard' && product.sizes[0] !=='Standard'">
+            <mat-form-field *ngFor="let size of sizes.controls; let i = index" class="w-100">
+              <mat-label>size {{i+1}}</mat-label>
+              <input matInput type="text" [formControlName]="i">
+              <mat-icon matSuffix (click)="removeSize(i)" *ngIf="product.sizes.length > 1">remove_circle</mat-icon>
+            </mat-form-field>
+          </div>
+
+
+          <!-- Image -->
+
+
+          <!-- Submit and Clear Buttons -->
+          <div class="row">
+            <div class="col-md-6">
+              <button mat-raised-button class="full-width btn-primary" type="submit">
+                Submit
+              </button>
+            </div>
+            <div class="col-md-6">
+
+              <button mat-raised-button class="full-width btn-primary" type="reset" (click)="modalRef.close(product)">
+                Cancel
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
